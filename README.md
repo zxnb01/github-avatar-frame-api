@@ -60,7 +60,7 @@ Theme Description codeTech-inspired - frame with brackets and linesopen-source S
 
 > Note: Only the code theme is included by default. Others can be added by the community following the
 
-[CONTRIBUTING.md](github.com/TechQuanta/frame-avatar-frame-api/CONTRIBUTING.md)
+[CONTRIBUTING.md](./CONTRIBUTING.md)
 
 📖 How to Use in README
 
@@ -74,7 +74,7 @@ Embed an avatar with a frame:
 
 *   🤝 Contribute
     
-*   We welcome new themes, improvements, and ideas! See [CONTRIBUTING.md](github.com/TechQuanta/frame-avatar-frame-api/CONTRIBUTING.md) to learn how to add themes and submit pull requests.
+*   We welcome new themes, improvements, and ideas! See [CONTRIBUTING.md](./CONTRIBUTING.md) to learn how to add themes and submit pull requests.
     
 *   **Contribution Flow:**
     
