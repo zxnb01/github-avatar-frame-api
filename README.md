@@ -1,40 +1,66 @@
-# GitHub Avatar Frame API
+# 🎨 GitHub Avatar Frame API
 
-A free and open-source API that allows you to frame your GitHub profile picture with creative themes! Easily embed styled avatars in your README files, portfolios, or social media.
+A free and open-source API that lets you frame your GitHub profile picture with creative themes. Use it in your README files, portfolios, or social media to showcase styled avatars.
 
----
+**🌐 Live API:** https://frame-api.vercel.app
 
-## 🌐 Live API
 
-Access the API at:  
-**https://frame-api.vercel.app**
 
----
+## 🚀 Project Purpose
+
+This project is a base skeleton API that currently includes only the `code` theme. Contributors can:
+
+- Add new frame themes 🎨
+- Propose new features ⚡
+- Improve documentation and examples ✍️
+
+The goal is to build a creative, community-driven way to style GitHub avatars.
+
+## 🛠 Run Locally
+
+### Fork the Repository
+Click on the **Fork** button at the top right of this repository to create a copy under your GitHub account.
+
+### Clone Your Fork
+```bash
+git clone https://github.com/TechQuanta/github-avatar-frame-api.git
+cd github-avatar-frame-api
+```
+
+### Install Dependencies
+```bash
+npm install
+```
+
+### Start the Development Server
+```bash
+npm run dev
+```
+
+Now open: http://localhost:3000
 
 ## 📂 Usage
 
-### ✅ Frame URL format
+### Frame URL Format
+```
+https://frame-api.vercel.app/api/frame/{theme}/{username}
+```
 
-`https://frame-api.vercel.app/api/frame/{theme}/{username}`
-
-- `{theme}` – The frame theme (e.g., `code`)
-- `{username}` – Your GitHub username
+- `{theme}` → The frame theme (e.g., `code`)
+- `{username}` → Your GitHub username
 
 **Example:**
+```
+https://frame-api.vercel.app/api/frame/code/octocat
+```
 
-![Code Avatar](https://frame-api.vercel.app/api/frame/code/octocat)
-
----
-
-### ✅ List of Available Themes
-
-Fetch all available themes dynamically:
-
-`https://frame-api.vercel.app/api/themes`
-
+### List Available Themes
+Check all available themes dynamically:
+```
+https://frame-api.vercel.app/api/themes
+```
 
 **Example response:**
-
 ```json
 {
   "themes": [
@@ -47,73 +73,63 @@ Fetch all available themes dynamically:
 }
 ```
 
-### ✅ Collage Example (Optional)
+### How to Use in README
+Embed a framed avatar in your README:
+```markdown
+![My Avatar](https://frame-api.vercel.app/api/frame/code/your-username)
+```
 
-Combine multiple avatars into one frame:
+Replace `your-username` with your actual GitHub username.
 
-[https://frame-api.vercel.app/api/collage/community?users=octocat,mojombo,torvalds](https://frame-api.vercel.app/api/collage/community?users=octocat,mojombo,torvalds)
+## 🤝 Contributing
 
-### 🖼 Example Themes
------------------
+We welcome contributions of all kinds:
 
-Theme Description codeTech-inspired - frame with brackets and linesopen-source Showcase, open-source contributions collaboration Highlight teamwork and partnerships hackathon Event badges with futuristic designs beginner Soft pastel frame for learnersproSleek minimalistic professional frame community, Group-oriented connecting elementsevents Calendar and schedule designs, funComic-style vibrant, framedark-modeNeon dark overlays for modern aesthetics
+- **New themes** in `public/frames/`
+- **New features** for the API
+- **Documentation** updates
+- **Bug fixes** and improvements
 
-> Note: Only the code theme is included by default. Others can be added by the community following the
+### Quick Start for Contributors:
+1. 🍴 Fork the repository
+2. 🌿 Create a new branch for your feature
+3. 🎨 Add your theme or improvement
+4. 🧪 Test your changes locally
+5. 📝 Submit a pull request
 
-[CONTRIBUTING.md](./CONTRIBUTING.md)
+### Ways to Contribute:
+- 🎨 **Design new themes** - Create unique frames for different use cases
+- 🐛 **Fix bugs** - Help improve stability and performance  
+- ✨ **Add features** - Implement new functionality like animated frames
+- 📚 **Improve docs** - Help others understand and use the project
+- 🧪 **Write tests** - Ensure code quality and reliability
 
-📖 How to Use in README
+👉 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed contribution steps.
+👉 All contributors must follow our [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
-Embed an avatar with a frame:
+## ⚙ Tech Stack
 
-![My Avatar](https://frame-api.vercel.app/api/frame/code/octocat)
+- **Node.js & Express.js (TypeScript)** → API backend
+- **Sharp** → Image processing
+- **Vercel** → Serverless deployment
+- **MongoDB** (optional) → Future caching/metadata
+- **TypeScript** → Type safety and better development
 
-*   Replace code with your desired theme
-    
-*   Replace octocat with your GitHub username
+## 🔗 Links
 
-*   🤝 Contribute
-    
-*   We welcome new themes, improvements, and ideas! See [CONTRIBUTING.md](./CONTRIBUTING.md) to learn how to add themes and submit pull requests.
-    
-*   **Contribution Flow:**
-    
-*   Use the working base theme (code) to test the API.
-    
-*   Add new frames or themes in public/frames/.
-    
-*   Submit a pull request for review.
+- **Live API:** https://frame-api.vercel.app
+- **Contributing Guidelines:** [CONTRIBUTING.md](CONTRIBUTING.md)
+- **Code of Conduct:** [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+- **Issues:** [GitHub Issues](https://github.com/TechQuanta/github-avatar-frame-api/issues)
 
+## 🌟 Show Your Support
 
-###  ⚙ Tech Stack
-    
-*   **Node.js & Express.js (TypeScript)** – API backend
-    
-*   **Sharp** – Image processing
-    
-*   **Vercel** – Serverless deployment
-    
-*   **MongoDB (optional)** – For caching or metadata in the future
-    
-*   **TypeScript** – Type safety and better development experience
+If you find this project useful, please consider:
+- ⭐ **Star this repository** - It helps others discover the project
+- 🐛 **Report bugs** or suggest features in [Issues](https://github.com/TechQuanta/github-avatar-frame-api/issues)
+- 🤝 **Contribute** new themes and improvements
+- 📢 **Share** it with the developer community
 
-### ✅ Key Features of This README:
+## 📜 License
 
-*   **Highlights the working base** (code theme) so users can see the API in action.
-    
-*   **Explains URL format** and shows example usage.
-    
-*   **Dynamic themes endpoint** explained.
-    
-*   **Collage feature** included as optional.
-    
-*   **Encourages contribution** with clear steps.
-    
-*   **Professional open-source structure** matching GSSoC projects.
-
-
----
-
-If you want, I can **now create a ready-to-use `metadata.json` template and a starter theme folder** that fits this TypeScript + Node + Sharp structure so contributors know exactly how to add new themes.  
-
-Do you want me to do that next?
+This project is licensed under the MIT License.
