@@ -1,3 +1,5 @@
+// src/server.ts
+
 import express, { Request, Response } from "express";
 import axios from "axios";
 import sharp from "sharp";
@@ -19,14 +21,27 @@ app.get("/", (req, res) => {
 app.get("/api/framed-avatar/:username", async (req: Request, res: Response) => {
   try {
     const username = req.params.username;
-    const theme = (req.query.theme as string) || "base"; // Default to base theme for testing
-    const size = Math.max(64, Math.min(Number(req.query.size ?? 256), 1024)); // Limit size between 64 and 1024
+    const theme = (req.query.theme as string) || "base";
+
+    // --- START OF MODIFICATIONS ---
+
+    // 1. Get the 'size' parameter as a string, with a default value.
+    const sizeStr = (req.query.size as string) ?? "256";
+
+    // 2. Validate the string to ensure it only contains digits.
+    if (!/^\d+$/.test(sizeStr)) {
+      return res.status(400).json({
+        error: "Bad Request",
+        message: "The 'size' parameter must be a valid integer.",
+      });
+    }
+
+    // 3. Safely parse the string to a number and clamp it to the allowed range.
+    const size = Math.max(64, Math.min(parseInt(sizeStr, 10), 1024));
+
+    // --- END OF MODIFICATIONS ---
 
     console.log(`Fetching avatar for username=${username}, theme=${theme}, size=${size}`);
-
-    if (isNaN(size) || size <= 0 || size > 1024) {
-      return res.status(400).json({ error: "Invalid size parameter" });
-    }
 
     // 1. Fetch GitHub avatar
     const avatarUrl = `https://github.com/${username}.png?size=${size}`;
@@ -81,9 +96,14 @@ app.get("/api/framed-avatar/:username", async (req: Request, res: Response) => {
     res.send(finalImage);
   } catch (error) {
     console.error("Error creating framed avatar:", error);
+    // Add a check for specific errors, like user not found from GitHub
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      return res.status(404).json({ error: `GitHub user '${req.params.username}' not found.` });
+    }
     res.status(500).json({ error: "Something went wrong." });
   }
 });
+
 
 /**
  * GET /api/themes
@@ -111,6 +131,7 @@ app.get("/api/themes", (req: Request, res: Response) => {
     res.status(500).json({ error: "Failed to load themes." });
   }
 });
+
 
 // Start server
 app.listen(PORT, () => {
