@@ -9,11 +9,6 @@ import fs from "fs";
 const app = express();
 const PORT = 3000;
 
-// Health check route (optional)
-app.get("/", (req, res) => {
-  res.send("Server is running");
-});
-
 /**
  * GET /api/framed-avatar/:username
  * Example: /api/framed-avatar/octocat?theme=base&size=256
