@@ -4,6 +4,14 @@ A free and open-source API that lets you frame your GitHub profile picture with 
 
 **🌐 Live API:** https://frame-api.vercel.app
 
+## Example:
+<div align=center>
+<a href="https://github-avatar-frame-api.vercel.app">
+  <img src="https://github-avatar-frame-api.vercel.app/api/framed-avatar/octocat?theme=neon&size=256" alt="avatar-api">
+</a>
+
+</div>
+
 
 
 ## 🚀 Project Purpose
