@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "builds": [
+    {
+    
+      "src": "src/server.tsx", 
+      "use": "@vercel/node",
+      "config": {
+      
+        "includeFiles": [
+          "api/frames/**/*",
+          "public/**/*"
+        ]
+      }
+    }
+  ],
+  "routes": [
+    {
+     
+      "src": "/api/(.*)",
+      "dest": "dist/server.js"
+    },
+    {
+     
+      "src": "/(.*)",
+      "dest": "dist/server.js"
+    }
+  ]
+}

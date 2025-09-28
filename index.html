@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>GitHub Avatar Frame Tool</title>
+    
+    <!-- Standard favicon link -->
+    <link rel="icon" type="image" href="favicon.jpeg" />
+    
+    <!-- Load Tailwind CSS for styling the entire application -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Define Inter font globally and set a default dark background */
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #111827; 
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white antialiased">
+    <!-- 
+        CRITICAL: This is the root container where your compiled React application 
+        (from index.tsx -> App.tsx) will be injected via ReactDOM.
+    -->
+    <div id="root"></div>
+    
+    <!-- 
+        CRITICAL: This loads the compiled JavaScript bundle (main.js) that runs your React code.
+        The server.tsx static middleware handles serving this file from the 'public' directory.
+    -->
+    <script type="module" src="/src/index.tsx"></script>
+</body>
+</html>

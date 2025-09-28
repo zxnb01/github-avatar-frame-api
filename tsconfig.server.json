@@ -1,0 +1,26 @@
+{
+  // This file is used specifically for compiling the Express server code (server.tsx)
+  "extends": "./tsconfig.json", 
+  "compilerOptions": {
+    "module": "ES2020",           // Use modern ES module system for compatibility with 'bundler'
+    "outDir": "./dist",            // Output compiled server code to 'dist'
+    "rootDir": "./src",            // Source files are in 'src'
+    "esModuleInterop": true,
+    // FIX for the composite error: This flag is required for project references
+    "composite": true, 
+    // FIX for the "may not disable emit" error: Must be explicitly set to false
+    "noEmit": false,
+    // NEW FIX: Override inherited 'lib' setting to only include Node.js environment libraries.
+    // 'dom' and 'dom.iterable' are likely still being referenced from tsconfig.json; 
+    // We override here with modern ECMAScript features plus Node types.
+    "lib": ["ES2020", "dom", "DOM.Iterable"]
+  },
+  "include": [
+    "src/server.tsx", 
+    "src/**/*.ts"     
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts"
+  ]
+}
