@@ -1,11 +1,38 @@
 {
   "compilerOptions": {
+    // Target environment options
     "target": "ES2020",
-    "module": "commonjs",
-    "rootDir": "src",
-    "outDir": "dist",
-    "strict": true,
+    "module": "CommonJS",
+    // Add the 'jsx' compiler option to support React/JSX syntax in .tsx files
+    "jsx": "react-jsx",
     "esModuleInterop": true,
-    "skipLibCheck": true
-  }
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    
+    // Output configuration
+    "outDir": "./dist",
+    "rootDir": "./src",
+    
+    // Module resolution
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    
+    // Declaration file generation (important for APIs)
+    "declaration": true,
+    "sourceMap": true
+  },
+  
+  // CRUCIAL FIX: Exclude the output directory from the source files
+  // If 'dist' is not excluded, tsc finds its own generated .d.ts files 
+  // and throws the TS6305 error during the build.
+  "exclude": [
+    "node_modules", 
+    "dist"
+  ],
+  
+  // Only include files in the 'src' directory
+  "include": [
+    "src/**/*"
+  ]
 }
