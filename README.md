@@ -8,7 +8,7 @@
 </p>
 
 <div align="center">
-  <img src="src/public/pic/gssoc.png" alt="GSSOC" width="80%">
+  <img src="public/assets/gssoc.png" alt="GSSOC" width="80%">
 </div>
 
 **📊 Project Insights**
@@ -27,13 +27,13 @@
      </thead>
     <tbody>
          <tr>
-            <td><img alt="Stars" src="https://img.shields.io/github/stars/dipexplorer/LegalHuB?style=flat&logo=github"/></td>
-            <td><img alt="Forks" src="https://img.shields.io/github/forks/dipexplorer/LegalHuB?style=flat&logo=github"/></td>
-            <td><img alt="Issues" src="https://img.shields.io/github/issues/dipexplorer/LegalHuB?style=flat&logo=github"/></td>
-            <td><img alt="Open PRs" src="https://img.shields.io/github/issues-pr/dipexplorer/LegalHuB?style=flat&logo=github"/></td>
-            <td><img alt="Closed PRs" src="https://img.shields.io/github/issues-pr-closed/dipexplorer/LegalHuB?style=flat&color=critical&logo=github"/></td>
-            <td><img alt="Languages Count" src="https://img.shields.io/github/languages/count/dipexplorer/LegalHuB?style=flat&color=green&logo=github"></td>
-            <td><img alt="Contributors Count" src="https://img.shields.io/github/contributors/dipexplorer/LegalHuB?style=flat&color=blue&logo=github"/></td>
+            <td><img alt="Stars" src="https://img.shields.io/github/stars/TechQuanta/github-avatar-frame-api?style=flat&logo=github"/></td>
+            <td><img alt="Forks" src="https://img.shields.io/github/forks/TechQuanta/github-avatar-frame-api?style=flat&logo=github"/></td>
+            <td><img alt="Issues" src="https://img.shields.io/github/issues/TechQuanta/github-avatar-frame-api?style=flat&logo=github"/></td>
+            <td><img alt="Open PRs" src="https://img.shields.io/github/issues-pr/TechQuanta/github-avatar-frame-api?style=flat&logo=github"/></td>
+            <td><img alt="Closed PRs" src="https://img.shields.io/github/issues-pr-closed/TechQuanta/github-avatar-frame-api?style=flat&color=critical&logo=github"/></td>
+            <td><img alt="Languages Count" src="https://img.shields.io/github/languages/count/TechQuanta/github-avatar-frame-api?style=flat&color=green&logo=github"></td>
+            <td><img alt="Contributors Count" src="https://img.shields.io/github/contributors/TechQuanta/github-avatar-frame-api?style=flat&color=blue&logo=github"/></td>
         </tr>
     </tbody>
 </table>
