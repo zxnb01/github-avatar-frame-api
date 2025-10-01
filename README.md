@@ -61,8 +61,8 @@ A free and open-source API to frame your GitHub avatar using creative themes. Pe
 https://github-avatar-frame-api.onrender.com/api/framed-avatar/{username}?theme={theme}&size={size}&canvas={canvas}&shape={shape}&radius={radius}
 </pre>
 
-<h3 style="color:#009688;">Query Parameters:</h3>
-
+<h3 style="color:#009688;" align=center>Query Parameters:</h3>
+<div align=right>
 <table style="width:100%; border-collapse:collapse; font-size:1.05em;">
 <thead style="background-color:#f5f5f5; text-align:center;">
 <tr>
@@ -83,6 +83,7 @@ https://github-avatar-frame-api.onrender.com/api/framed-avatar/{username}?theme=
 </tbody>
 </table>
 
+</div>
 <br>
 
 <h3 style="color:#ff4081;">Canvas, Shape & Radius Explained</h3>
@@ -94,7 +95,7 @@ https://github-avatar-frame-api.onrender.com/api/framed-avatar/{username}?theme=
 </ul>
 
 <p>Combine all three to customize your avatar:</p>
-
+<div align=center>
 <table style="width:100%; border-collapse:collapse; font-size:1.05em; text-align:center;">
 <thead style="background-color:#f5f5f5;">
 <tr>
@@ -111,14 +112,14 @@ https://github-avatar-frame-api.onrender.com/api/framed-avatar/{username}?theme=
 <td>circle</td>
 <td>-</td>
 <td><a href="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?canvas=light&shape=circle" target="_blank">URL</a></td>
-<td><img src="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?canvas=light&shape=circle&size=100&theme=base" width="80"></td>
+<td><img src="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?theme=classic&size=256&shape=circle&radius=15&canvas=light" width="80"></td>
 </tr>
 <tr>
 <td>dark</td>
 <td>circle</td>
 <td>-</td>
 <td><a href="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?canvas=dark&shape=circle" target="_blank">URL</a></td>
-<td><img src="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?canvas=dark&shape=circle&size=100&theme=base" width="80"></td>
+<td><img src="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?theme=classic&size=256&shape=circle&radius=15&canvas=dark" width="80"></td>
 </tr>
 <tr>
 <td>light</td>
@@ -132,11 +133,11 @@ https://github-avatar-frame-api.onrender.com/api/framed-avatar/{username}?theme=
 <td>rounded</td>
 <td>50</td>
 <td><a href="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?canvas=dark&shape=rounded&radius=50" target="_blank">URL</a></td>
-<td><img src="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?canvas=dark&shape=rounded&radius=50&size=100&theme=base" width="80"></td>
+<td><img src="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?theme=classic&size=256&shape=rounded&radius=20&canvas=dark" width="80"></td>
 </tr>
 </tbody>
 </table>
-
+</div>
 <br>
 
 <h3 style="color:#ff4081;">Live Examples by Theme</h3>
@@ -172,7 +173,7 @@ https://github-avatar-frame-api.onrender.com/api/framed-avatar/{username}?theme=
 <tr>
 <td>base</td>
 <td>light / rounded / 50</td>
-<td><img src="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?theme=base&size=100&canvas=light&shape=rounded&radius=50" width="80"></td>
+<td><img src="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?theme=neon&size=100&canvas=light&shape=rounded&radius=50" width="80"></td>
 <td>Base theme, light background, rounded corners 50px</td>
 </tr>
 <tr>
@@ -192,7 +193,7 @@ https://github-avatar-frame-api.onrender.com/api/framed-avatar/{username}?theme=
 
 <br>
 
-<h3 style="color:#3f51b5;">Embed in README</h3>
+<h3 style="color:#3f51b5;" align=right>Embed in README</h3>
 
 <pre style="background-color:#f0f0f0; padding:10px; border-radius:10px;">
 ![My Avatar](https://github-avatar-frame-api.onrender.com/api/framed-avatar/your-username?theme=flamingo&size=256&canvas=dark&shape=rounded&radius=20)
