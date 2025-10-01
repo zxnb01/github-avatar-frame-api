@@ -6,7 +6,7 @@ import {
 
 // NOTE: Replace with your actual API URL or environment variable
 const API_BASE_URL =
-  import.meta.env.NODE_ENV === 'production'
+    process.env.NODE_ENV === 'production'
     ? 'https://github-avatar-frame-api.onrender.com'
     : 'http://localhost:3000';
 
