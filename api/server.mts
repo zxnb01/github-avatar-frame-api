@@ -3,22 +3,14 @@ import axios from "axios";
 import sharp from "sharp";
 import path from "path";
 import fs from "fs";
-// CRITICAL ESM FIX: Import utilities to define __dirname
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
 const app = express();
 // Use environment PORT for hosting environments like Render, default to 3000 for local dev
 const PORT = process.env.PORT || 3000;
 
-// CRITICAL ESM FIX: Define __dirname equivalent for ES Modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
 // Helper to determine the base directory for assets, reliable across compilation (dist)
-// In development, __dirname is '.../api', so '..' takes us to '...' (project root).
+// Assumes 'public' is located one level up from the compiled script location.
 const ASSET_BASE_PATH = path.join(__dirname, '..');
-
 
 /**
  * GET /api/framed-avatar/:username
@@ -47,7 +39,7 @@ app.get("/api/framed-avatar/:username", async (req: Request, res: Response) => {
     const avatarResponse = await axios.get(avatarUrl, { responseType: "arraybuffer" });
     
     // CRITICAL FIX: Check the Content-Type header. If GitHub returns an HTML error page 
-    // (which causes the corrupt header error), we reject it before sharp processes it.
+    // (which causes the corrupt header error), we reject it.
     const contentType = avatarResponse.headers['content-type'] || '';
     if (!contentType.startsWith('image/')) {
       console.error(`GitHub returned unexpected content type: ${contentType} for user ${username}.`);
@@ -57,7 +49,7 @@ app.get("/api/framed-avatar/:username", async (req: Request, res: Response) => {
     const avatarBuffer = Buffer.from(avatarResponse.data);
 
     // 2. Load and validate frame
-    // FIX: Use ASSET_BASE_PATH for reliable path resolution
+    // FIX: Use ASSET_BASE_PATH for reliable path resolution (instead of process.cwd())
     const framePath = path.join(ASSET_BASE_PATH, "public", "frames", theme, "frame.png"); 
     if (!fs.existsSync(framePath)) {
       console.error(`Frame not found at: ${framePath}`);
@@ -122,7 +114,7 @@ app.get("/api/framed-avatar/:username", async (req: Request, res: Response) => {
  */
 app.get("/api/themes", (req: Request, res: Response) => {
   try {
-    // FIX: Use ASSET_BASE_PATH for reliable path resolution
+    // FIX: Use ASSET_BASE_PATH for reliable path resolution (instead of process.cwd())
     const framesDir = path.join(ASSET_BASE_PATH, "public", "frames");
     
     if (!fs.existsSync(framesDir)) {

@@ -3,12 +3,12 @@
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "rootDir": "api",
+    "rootDir": ".", // Change rootDir to project root
     "outDir": "dist",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true
   },
-  "include": ["api/**/*.mts"],
+  "include": ["api/server.mts"], // Explicitly include the entry file
   "exclude": ["node_modules"]
 }
