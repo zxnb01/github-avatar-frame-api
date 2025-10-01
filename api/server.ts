@@ -1,10 +1,13 @@
 import express, { Request, Response } from "express";
 import axios from "axios";
 import sharp from "sharp";
+import cors from "cors";
 import path from "path";
 import fs from "fs";
 
 const app = express();
+
+app.use(cors());
 // Use environment PORT for hosting environments like Render, default to 3000 for local dev
 const PORT = process.env.PORT || 3000;
 
