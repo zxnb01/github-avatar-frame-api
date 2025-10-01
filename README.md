@@ -61,8 +61,8 @@ A free and open-source API to frame your GitHub avatar using creative themes. Pe
 https://github-avatar-frame-api.onrender.com/api/framed-avatar/{username}?theme={theme}&size={size}&canvas={canvas}&shape={shape}&radius={radius}
 </pre>
 
-<h3 style="color:#009688;">Query Parameters:</h3>
-
+<h3 style="color:#009688;" align=center>Query Parameters:</h3>
+<div align=right>
 <table style="width:100%; border-collapse:collapse; font-size:1.05em;">
 <thead style="background-color:#f5f5f5; text-align:center;">
 <tr>
@@ -83,6 +83,7 @@ https://github-avatar-frame-api.onrender.com/api/framed-avatar/{username}?theme=
 </tbody>
 </table>
 
+</div>
 <br>
 
 <h3 style="color:#ff4081;">Canvas, Shape & Radius Explained</h3>
@@ -94,7 +95,7 @@ https://github-avatar-frame-api.onrender.com/api/framed-avatar/{username}?theme=
 </ul>
 
 <p>Combine all three to customize your avatar:</p>
-
+<div align=center>
 <table style="width:100%; border-collapse:collapse; font-size:1.05em; text-align:center;">
 <thead style="background-color:#f5f5f5;">
 <tr>
@@ -136,7 +137,7 @@ https://github-avatar-frame-api.onrender.com/api/framed-avatar/{username}?theme=
 </tr>
 </tbody>
 </table>
-
+</div>
 <br>
 
 <h3 style="color:#ff4081;">Live Examples by Theme</h3>
@@ -192,7 +193,7 @@ https://github-avatar-frame-api.onrender.com/api/framed-avatar/{username}?theme=
 
 <br>
 
-<h3 style="color:#3f51b5;">Embed in README</h3>
+<h3 style="color:#3f51b5;" align=right>Embed in README</h3>
 
 <pre style="background-color:#f0f0f0; padding:10px; border-radius:10px;">
 ![My Avatar](https://github-avatar-frame-api.onrender.com/api/framed-avatar/your-username?theme=flamingo&size=256&canvas=dark&shape=rounded&radius=20)
