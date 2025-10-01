@@ -20,76 +20,70 @@ app.get("/api/framed-avatar/:username", async (req: Request, res: Response) => {
   try {
     const username = req.params.username;
     const theme = (req.query.theme as string) || "base";
-
     const sizeStr = (req.query.size as string) ?? "256";
+    const shape = ((req.query.shape as string) || "circle").toLowerCase();
+    const radiusStr = req.query.radius as string | undefined;
+    const canvasParam = (req.query.canvas as string)?.toLowerCase() || "light"; // "dark" or "light"
 
     if (!/^\d+$/.test(sizeStr)) {
-      return res.status(400).json({
-        error: "Bad Request",
-        message: "The 'size' parameter must be a valid integer.",
-      });
+      return res.status(400).json({ error: "Bad Request", message: "The 'size' parameter must be a valid integer." });
     }
 
     const size = Math.max(64, Math.min(parseInt(sizeStr, 10), 1024));
 
-    console.log(`Fetching avatar for username=${username}, theme=${theme}, size=${size}`);
+    // determine corner radius
+    let cornerRadius: number;
+    if (shape === "circle") cornerRadius = Math.floor(size / 2);
+    else if (radiusStr && /^\d+$/.test(radiusStr)) cornerRadius = Math.max(0, Math.min(parseInt(radiusStr, 10), Math.floor(size / 2)));
+    else cornerRadius = Math.floor(size * 0.1);
 
-    // 1. Fetch GitHub avatar
+    // determine canvas color
+    let canvasColor: { r: number; g: number; b: number; alpha: number };
+    if (canvasParam === "dark") canvasColor = { r: 34, g: 34, b: 34, alpha: 1 }; // dark gray
+    else canvasColor = { r: 240, g: 240, b: 240, alpha: 1 }; // light gray default
+
+    // Fetch avatar
     const avatarUrl = `https://github.com/${username}.png?size=${size}`;
     const avatarResponse = await axios.get(avatarUrl, { responseType: "arraybuffer" });
-    
-    // CRITICAL FIX: Check the Content-Type header. If GitHub returns an HTML error page 
-    // (which causes the corrupt header error), we reject it.
-    const contentType = avatarResponse.headers['content-type'] || '';
-    if (!contentType.startsWith('image/')) {
-      console.error(`GitHub returned unexpected content type: ${contentType} for user ${username}.`);
-      return res.status(404).json({ error: `GitHub user '${username}' avatar not found or returned invalid image data.` });
-    }
-
+    const contentType = avatarResponse.headers["content-type"] || "";
+    if (!contentType.startsWith("image/")) return res.status(404).json({ error: `GitHub user '${username}' avatar not found.` });
     const avatarBuffer = Buffer.from(avatarResponse.data);
 
-    // 2. Load and validate frame
-    // FIX: Use ASSET_BASE_PATH for reliable path resolution (instead of process.cwd())
-    const framePath = path.join(ASSET_BASE_PATH, "public", "frames", theme, "frame.png"); 
-    if (!fs.existsSync(framePath)) {
-      console.error(`Frame not found at: ${framePath}`);
-      return res.status(404).json({ error: `Theme '${theme}' not found.` });
-    }
+    // Load frame
+    const framePath = path.join(ASSET_BASE_PATH, "public", "frames", theme, "frame.png");
+    if (!fs.existsSync(framePath)) return res.status(404).json({ error: `Theme '${theme}' not found.` });
     const frameBuffer = fs.readFileSync(framePath);
 
-    // 3. Resize avatar to match requested size
-    const avatarResized = await sharp(avatarBuffer)
-      .resize(size, size)
-      .png()
-      .toBuffer();
+    // Resize avatar
+    const avatarResized = await sharp(avatarBuffer).resize(size, size).png().toBuffer();
 
-    // 4. Pad frame to square and resize
+    // Resize frame
     const frameMetadata = await sharp(frameBuffer).metadata();
-    const maxSide = Math.max(frameMetadata.width!, frameMetadata.height!);
-
+    const maxSide = Math.max(frameMetadata.width || size, frameMetadata.height || size);
     const paddedFrame = await sharp(frameBuffer)
-      .resize({
-        width: maxSide,
-        height: maxSide,
-        fit: "contain",
-        background: { r: 0, g: 0, b: 0, alpha: 0 }, // Transparent background
-      })
+      .resize({ width: maxSide, height: maxSide, fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
       .resize(size, size)
       .png()
       .toBuffer();
 
-    // 5. Compose avatar + frame on transparent canvas
+    // Create mask for rounded corners
+    const maskSvg = `<svg width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="${size}" height="${size}" rx="${cornerRadius}" ry="${cornerRadius}" fill="#fff"/>
+    </svg>`;
+    const maskBuffer = Buffer.from(maskSvg);
+
+    const avatarMasked = await sharp(avatarResized)
+      .composite([{ input: maskBuffer, blend: "dest-in" }])
+      .png()
+      .toBuffer();
+
+    // Compose final image on custom canvas color
     const finalImage = await sharp({
-      create: {
-        width: size,
-        height: size,
-        channels: 4,
-        background: { r: 0, g: 0, b: 0, alpha: 0 },
-      },
+      create: { width: size, height: size, channels: 4, background: canvasColor }
     })
       .composite([
-        { input: avatarResized, gravity: "center" },
-        { input: paddedFrame, gravity: "center" },
+        { input: avatarMasked, gravity: "center" },
+        { input: paddedFrame, gravity: "center" }
       ])
       .png()
       .toBuffer();
@@ -98,15 +92,12 @@ app.get("/api/framed-avatar/:username", async (req: Request, res: Response) => {
     res.send(finalImage);
   } catch (error) {
     console.error("Error creating framed avatar:", error);
-    // Add a check for specific errors, like user not found from GitHub
     if (axios.isAxiosError(error) && error.response?.status === 404) {
       return res.status(404).json({ error: `GitHub user '${req.params.username}' not found.` });
     }
-    // Return a clearer 500 message for generic crashes
     res.status(500).json({ error: "Internal Server Error during image processing." });
   }
 });
-
 
 /**
  * GET /api/themes
