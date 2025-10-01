@@ -111,14 +111,14 @@ https://github-avatar-frame-api.onrender.com/api/framed-avatar/{username}?theme=
 <td>circle</td>
 <td>-</td>
 <td><a href="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?canvas=light&shape=circle" target="_blank">URL</a></td>
-<td><img src="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?canvas=light&shape=circle&size=100&theme=base" width="80"></td>
+<td><img src="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?theme=classic&size=256&shape=circle&radius=15&canvas=light" width="80"></td>
 </tr>
 <tr>
 <td>dark</td>
 <td>circle</td>
 <td>-</td>
 <td><a href="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?canvas=dark&shape=circle" target="_blank">URL</a></td>
-<td><img src="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?canvas=dark&shape=circle&size=100&theme=base" width="80"></td>
+<td><img src="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?theme=classic&size=256&shape=circle&radius=15&canvas=dark" width="80"></td>
 </tr>
 <tr>
 <td>light</td>
@@ -132,7 +132,7 @@ https://github-avatar-frame-api.onrender.com/api/framed-avatar/{username}?theme=
 <td>rounded</td>
 <td>50</td>
 <td><a href="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?canvas=dark&shape=rounded&radius=50" target="_blank">URL</a></td>
-<td><img src="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?canvas=dark&shape=rounded&radius=50&size=100&theme=base" width="80"></td>
+<td><img src="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?theme=classic&size=256&shape=rounded&radius=20&canvas=dark" width="80"></td>
 </tr>
 </tbody>
 </table>
@@ -172,7 +172,7 @@ https://github-avatar-frame-api.onrender.com/api/framed-avatar/{username}?theme=
 <tr>
 <td>base</td>
 <td>light / rounded / 50</td>
-<td><img src="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?theme=base&size=100&canvas=light&shape=rounded&radius=50" width="80"></td>
+<td><img src="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?theme=neon&size=100&canvas=light&shape=rounded&radius=50" width="80"></td>
 <td>Base theme, light background, rounded corners 50px</td>
 </tr>
 <tr>
