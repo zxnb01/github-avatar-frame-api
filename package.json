@@ -4,9 +4,9 @@
   "type": "module",
   "main": "dist/server.mjs",
   "scripts": {
-    "dev": "nodemon --exec \"node --loader ts-node/esm api/server.mts\" --ext mts,json",
+    "dev": "nodemon --exec \"node --loader ts-node/esm api/server.ts\" --ext ts,json",
     "build": "tsc -p tsconfig.server.json",
-    "start": "node dist/server.mjs"
+    "start": "node dist/server.js"
   },
   "dependencies": {
     "axios": "^1.12.2",
