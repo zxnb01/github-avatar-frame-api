@@ -1,0 +1,156 @@
+import express, { Request, Response } from "express";
+import axios from "axios";
+import sharp from "sharp";
+import path from "path";
+import fs from "fs";
+// CRITICAL ESM FIX: Import utilities to define __dirname
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const app = express();
+// Use environment PORT for hosting environments like Render, default to 3000 for local dev
+const PORT = process.env.PORT || 3000;
+
+// CRITICAL ESM FIX: Define __dirname equivalent for ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Helper to determine the base directory for assets, reliable across compilation (dist)
+// In development, __dirname is '.../api', so '..' takes us to '...' (project root).
+const ASSET_BASE_PATH = path.join(__dirname, '..');
+
+
+/**
+ * GET /api/framed-avatar/:username
+ * Example: /api/framed-avatar/octocat?theme=base&size=256
+ */
+app.get("/api/framed-avatar/:username", async (req: Request, res: Response) => {
+  try {
+    const username = req.params.username;
+    const theme = (req.query.theme as string) || "base";
+
+    const sizeStr = (req.query.size as string) ?? "256";
+
+    if (!/^\d+$/.test(sizeStr)) {
+      return res.status(400).json({
+        error: "Bad Request",
+        message: "The 'size' parameter must be a valid integer.",
+      });
+    }
+
+    const size = Math.max(64, Math.min(parseInt(sizeStr, 10), 1024));
+
+    console.log(`Fetching avatar for username=${username}, theme=${theme}, size=${size}`);
+
+    // 1. Fetch GitHub avatar
+    const avatarUrl = `https://github.com/${username}.png?size=${size}`;
+    const avatarResponse = await axios.get(avatarUrl, { responseType: "arraybuffer" });
+    
+    // CRITICAL FIX: Check the Content-Type header. If GitHub returns an HTML error page 
+    // (which causes the corrupt header error), we reject it before sharp processes it.
+    const contentType = avatarResponse.headers['content-type'] || '';
+    if (!contentType.startsWith('image/')) {
+      console.error(`GitHub returned unexpected content type: ${contentType} for user ${username}.`);
+      return res.status(404).json({ error: `GitHub user '${username}' avatar not found or returned invalid image data.` });
+    }
+
+    const avatarBuffer = Buffer.from(avatarResponse.data);
+
+    // 2. Load and validate frame
+    // FIX: Use ASSET_BASE_PATH for reliable path resolution
+    const framePath = path.join(ASSET_BASE_PATH, "public", "frames", theme, "frame.png"); 
+    if (!fs.existsSync(framePath)) {
+      console.error(`Frame not found at: ${framePath}`);
+      return res.status(404).json({ error: `Theme '${theme}' not found.` });
+    }
+    const frameBuffer = fs.readFileSync(framePath);
+
+    // 3. Resize avatar to match requested size
+    const avatarResized = await sharp(avatarBuffer)
+      .resize(size, size)
+      .png()
+      .toBuffer();
+
+    // 4. Pad frame to square and resize
+    const frameMetadata = await sharp(frameBuffer).metadata();
+    const maxSide = Math.max(frameMetadata.width!, frameMetadata.height!);
+
+    const paddedFrame = await sharp(frameBuffer)
+      .resize({
+        width: maxSide,
+        height: maxSide,
+        fit: "contain",
+        background: { r: 0, g: 0, b: 0, alpha: 0 }, // Transparent background
+      })
+      .resize(size, size)
+      .png()
+      .toBuffer();
+
+    // 5. Compose avatar + frame on transparent canvas
+    const finalImage = await sharp({
+      create: {
+        width: size,
+        height: size,
+        channels: 4,
+        background: { r: 0, g: 0, b: 0, alpha: 0 },
+      },
+    })
+      .composite([
+        { input: avatarResized, gravity: "center" },
+        { input: paddedFrame, gravity: "center" },
+      ])
+      .png()
+      .toBuffer();
+
+    res.set("Content-Type", "image/png");
+    res.send(finalImage);
+  } catch (error) {
+    console.error("Error creating framed avatar:", error);
+    // Add a check for specific errors, like user not found from GitHub
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      return res.status(404).json({ error: `GitHub user '${req.params.username}' not found.` });
+    }
+    // Return a clearer 500 message for generic crashes
+    res.status(500).json({ error: "Internal Server Error during image processing." });
+  }
+});
+
+
+/**
+ * GET /api/themes
+ * Lists all available themes + metadata
+ */
+app.get("/api/themes", (req: Request, res: Response) => {
+  try {
+    // FIX: Use ASSET_BASE_PATH for reliable path resolution
+    const framesDir = path.join(ASSET_BASE_PATH, "public", "frames");
+    
+    if (!fs.existsSync(framesDir)) {
+        return res.status(500).json({ error: `Frames directory not found at: ${framesDir}` });
+    }
+
+    const themes = fs.readdirSync(framesDir).filter(folder =>
+      fs.existsSync(path.join(framesDir, folder, "frame.png"))
+    );
+
+    const result = themes.map(theme => {
+      const metadataPath = path.join(framesDir, theme, "metadata.json");
+      let metadata = {};
+      if (fs.existsSync(metadataPath)) {
+        metadata = JSON.parse(fs.readFileSync(metadataPath, "utf-8"));
+      }
+      return { theme, ...metadata };
+    });
+
+    res.json(result);
+  } catch (error) {
+    console.error("Error listing themes:", error);
+    res.status(500).json({ error: "Failed to load themes." });
+  }
+});
+
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
+});

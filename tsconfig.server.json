@@ -1,17 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ESNext",                // Modern JS output
-    "module": "NodeNext",              // Node-compatible ES modules
-    "moduleResolution": "NodeNext",    // Required with NodeNext module
-    "strict": true,                    // Enable strict type checking
-    "esModuleInterop": true,           // Enable CJS <-> ESM interop
-    "skipLibCheck": true,              // Skip type checking for node_modules
-    "outDir": "./dist",                // Output directory
-    "rootDir": "api",                  // All source files live under api/
-    "composite": true,                 // Allows project references if needed
-    "noEmit": false,                   // Actually emit JS files
-    "lib": ["ES2020", "DOM", "DOM.Iterable"] // Include modern JS + DOM
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "rootDir": "api",
+    "outDir": "dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
-  "include": ["api/**/*.ts", "api/**/*.tsx", "api/**/*.mts"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.tsx"]
+  "include": ["api/**/*.mts"],
+  "exclude": ["node_modules"]
 }
