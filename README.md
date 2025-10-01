@@ -47,7 +47,7 @@ A free and open-source API that lets you frame your GitHub profile picture with 
 ## Example:
 <div align=center>
 <a href="https://techquanta.tech">
-  <img src="https://github-avatar-frame-api.onrender.com/api/framed-avatar/octocat?theme=classic&size=256" alt="avatar-api">
+  <img src="https://github-avatar-frame-api.onrender.com/api/framed-avatar/techquanta?theme=flamingo&size=256" alt="avatar-api">
 </a>
 
 </div>
