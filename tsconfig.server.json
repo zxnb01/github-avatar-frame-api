@@ -1,14 +1,13 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "rootDir": ".", // Change rootDir to project root
+    "module": "CommonJS",
+    "rootDir": "api",
     "outDir": "dist",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true
   },
-  "include": ["api/server.ts"], // Explicitly include the entry file
+  "include": ["api/**/*.ts"],
   "exclude": ["node_modules"]
 }
