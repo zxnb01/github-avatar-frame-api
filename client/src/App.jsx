@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import {
   Frame,
   Download,
@@ -180,6 +182,13 @@ const CommunityModal = ({ isOpen, onClose, colors }) => {
 
 // --- Main App Component ---
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, 
+      easing: "ease-in-out",
+      once: true, 
+    });
+  }, []);
   const [username, setUsername] = useState("");
   const [themes, setThemes] = useState([]);
   const [selectedTheme, setSelectedTheme] = useState("base");
@@ -407,7 +416,9 @@ function App() {
             flexWrap: "wrap",
             gap: "16px",
           }}
-          className='header-container'>
+          className='header-container'
+          data-aos="fade-down"
+          >
           {/* Center Title Block */}
           <div
             style={{
@@ -455,7 +466,7 @@ function App() {
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
                   margin: 0,
-                }}>
+                }} data-aos="zoom-in">
                 𝕲𝖎𝖙𝕳𝖚𝖇 𝔸𝕧𝕒𝕥𝕒𝕣 𝕱𝖗𝖆𝖒𝖊𝖘
               </h1>
             </div>
@@ -464,14 +475,15 @@ function App() {
                 color: colors.textSecondary,
                 fontSize: "16px",
                 margin: "0",
-              }}>
+              }}
+              data-aos="fade-right">
               ↤↤↤↤↤ 𝐶𝑟𝑒𝑎𝑡𝑒 𝑠𝑡𝑢𝑛𝑛𝑖𝑛𝑔 𝑓𝑟𝑎𝑚𝑒𝑑 𝑎𝑣𝑎𝑡𝑎𝑟𝑠 𝑓𝑜𝑟 𝑦𝑜𝑢𝑟 𝐺𝑖𝑡𝐻𝑢𝑏 𝑝𝑟𝑜𝑓𝑖𝑙𝑒 𝑖𝑛
               𝑠𝑒𝑐𝑜𝑛𝑑𝑠 ↦↦↦↦↦
             </p>
           </div>
 
           {/* Open Community Button (Top Right) */}
-          <button
+          <button data-aos="fade-right"
             onClick={() => setIsCommunityModalOpen(true)}
             className='community-button'
             style={{
@@ -512,7 +524,7 @@ function App() {
         </div>
 
         {/* --- 2. Progress Steps --- */}
-        <div style={{ marginBottom: "32px" }}>
+        <div data-aos="fade-right" style={{ marginBottom: "32px" }}>
           <div
             style={{
               background: colors.bgCard,
@@ -608,7 +620,7 @@ function App() {
             gap: "24px",
           }}>
           {/* Left: Configuration Panel (50%) */}
-          <div
+          <div data-aos="flip-right"
             style={{
               background: colors.bgCard,
               borderRadius: "12px",
@@ -990,7 +1002,7 @@ function App() {
           </div>
 
           {/* Right: Preview Panel (50%) */}
-          <div
+          <div data-aos="flip-left"
             style={{
               background: colors.bgCard,
               borderRadius: "12px",
