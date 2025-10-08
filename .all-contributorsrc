@@ -1,0 +1,41 @@
+{
+  "projectName": "github-avatar-frame-api",
+  "projectOwner": "TechQuanta",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "CONTRIBUTORS.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributorsPerLine": 7,
+  "contributorsSortAlphabetically": false,
+  "types": {
+    "custom": {
+      "symbol": "🔭",
+      "description": "A custom contribution type.",
+      "link": "[<%= symbol %>](<%= url %> \"<%= description %>\")"
+    }
+  },
+  "contributors": [
+    {
+      "login": "Anvesha-24",
+      "name": "Anvesha-24",
+      "avatar_url": "https://avatars.githubusercontent.com/u/208858168?v=4",
+      "profile": "https://github.com/Anvesha-24",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "shivram9",
+      "name": "Shivram Reddy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/205002678?v=4",
+      "profile": "https://github.com/shivram9",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "commitConvention": "angular"
+}

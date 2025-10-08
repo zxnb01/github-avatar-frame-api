@@ -9,8 +9,8 @@
     "start": "node dist/server.js"
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "axios": "^1.12.2",
-    "aos":"^19.2.0",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "sharp": "^0.34.4"
@@ -19,6 +19,7 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^4.17.23",
     "@types/node": "^24.5.2",
+    "all-contributors-cli": "^6.26.1",
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
