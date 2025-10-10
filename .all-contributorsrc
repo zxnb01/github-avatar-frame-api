@@ -33,9 +33,7 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/205002678?v=4",
       "profile": "https://github.com/shivram9",
       "contributions": [
-        "code",
-        "platform",
-        "infra"
+        "code"
       ]
     },
     {
@@ -124,6 +122,15 @@
       "name": "ifthikaar24",
       "avatar_url": "https://avatars.githubusercontent.com/u/145851574?v=4",
       "profile": "https://github.com/ifthikaar24",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "allcontributors[bot]",
+      "name": "allcontributors[bot]",
+      "avatar_url": "https://avatars.githubusercontent.com/in/23186?v=4",
+      "profile": "https://github.com/apps/allcontributors",
       "contributions": [
         "code"
       ]
