@@ -33,7 +33,9 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/205002678?v=4",
       "profile": "https://github.com/shivram9",
       "contributions": [
-        "code"
+        "code",
+        "platform",
+        "infra"
       ]
     },
     {
@@ -127,5 +129,6 @@
       ]
     }
   ],
-  "commitConvention": "angular"
+  "commitConvention": "angular",
+  "commitType": "docs"
 }
